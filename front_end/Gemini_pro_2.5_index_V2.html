@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sha8alny - Freelance Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7b2cbf;
+            --secondary-color: #5a189a;
+            --accent-color: #c77dff;
+            --light-color: #f8f9fa;
+            --dark-color: #1b1b1b;
+            --text-color: #e0e0e0;
+        }
+
+        /* Basic body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #120c18;
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-overlay {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(123, 44, 191, 0.3), transparent 40%),
+                        radial-gradient(circle at 85% 70%, rgba(90, 24, 154, 0.3), transparent 40%);
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary-color);
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .shape-1 { width: 200px; height: 200px; top: 10%; left: 5%; animation-duration: 25s; }
+        .shape-2 { width: 150px; height: 150px; top: 50%; left: 80%; animation-duration: 30s; }
+        .shape-3 { width: 100px; height: 100px; top: 80%; left: 20%; animation-duration: 20s; }
+        .shape-4 { width: 50px; height: 50px; top: 30%; left: 50%; animation-duration: 15s; }
+        .shape-5 { width: 120px; height: 120px; top: 60%; left: 5%; animation-duration: 35s; }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+        
+        /* Navigation bar */
+        .navbar {
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(18, 12, 24, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+        
+        .nav-btn {
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+
+        .login-btn {
+            background: transparent;
+            color: #fff;
+        }
+
+        .login-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .signup-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        .signup-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Main Content & Sections */
+        .main-content {
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 6rem 0;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .animated-title {
+            font-size: 7rem;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -3px;
+            color: #fff;
+            animation: text-pop-up 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @keyframes text-pop-up {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .description {
+            max-width: 600px;
+            margin: 1rem auto 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+            font-size: 1rem;
+        }
+        .primary { background: var(--primary-color); color: #fff; }
+        .primary:hover { background: var(--secondary-color); }
+        .secondary { background: transparent; color: #fff; border-color: var(--primary-color); }
+        .secondary:hover { background: var(--primary-color); }
+
+        /* Company History Section */
+        .history-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .history-text p {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.08);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-number { font-size: 2.5rem; margin: 0; color: var(--accent-color); }
+        .stat-label { margin: 0.5rem 0 0; }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .feature-card:hover { 
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.1);
+        }
+        .feature-card h3 { color: var(--accent-color); margin-top: 0; }
+
+        /* Footer */
+        .footer {
+            background: #0d0710;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-section h3 { color: var(--accent-color); }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li a, .social-link { color: var(--text-color); text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-links li a:hover, .social-link:hover { color: #fff; }
+        .footer-bottom { text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        /* Form Pages */
+        .form-page-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+        
+        form {
+            background-color: #1f1429;
+            color: var(--text-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        form h2 { margin-top: 0; text-align: center; color: #fff; }
+        form label { display: block; margin-bottom: 5px; font-weight: 500; }
+        form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #332842;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background: #120c18;
+            color: #fff;
+        }
+        form button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        form button:hover { background-color: var(--secondary-color); }
+
+        .hidden { display: none; }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .animated-title { font-size: 4rem; }
+            .history-content { grid-template-columns: 1fr; }
+            .nav-container { flex-direction: column; gap: 1rem; }
+            .main-content { padding: 1rem; }
+            .cta-btn { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="gradient-overlay"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home" class="logo-text" onclick="showPage('home')">sha8alny</a>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn login-btn" onclick="showPage('login')">Login</button>
+                <button class="nav-btn signup-btn" onclick="showPage('signup')">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Home Page Content -->
+        <div id="home" class="page">
+            <div class="hero-section">
+                <h1 class="animated-title">sha8alny</h1>
+                <p class="subtitle">Your Gateway to Freelance Success</p>
+                <p class="description">Connect with top talent or find your next project on the world's leading freelance platform</p>
+                <div class="cta-buttons">
+                    <button class="cta-btn primary" onclick="showPage('signup')">Get Started</button>
+                    <button class="cta-btn secondary" onclick="scrollToFooter()">Learn More</button>
+                </div>
+            </div>
+
+            <section class="company-history">
+                <div class="container">
+                    <h2 class="section-title">Our Story Since 1990</h2>
+                    <div class="history-content">
+                        <div class="history-text">
+                            <p>Founded in 1990, Sha8alny began as a small startup with a revolutionary vision: to connect talented freelancers with businesses in need of their expertise.</p>
+                            <p>Over three decades, we've facilitated millions of successful projects, from small startups to Fortune 500 companies. Our platform has grown to serve over 50 million freelancers and 5 million businesses worldwide.</p>
+                            <p>Today, Sha8alny continues to innovate, offering cutting-edge tools, secure payment systems, and AI-powered matching to help freelancers and clients find their perfect match.</p>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item"><h3 class="stat-number">30+</h3><p class="stat-label">Years</p></div>
+                            <div class="stat-item"><h3 class="stat-number">50M+</h3><p class="stat-label">Freelancers</p></div>
+                            <div class="stat-item"><h3 class="stat-number">5M+</h3><p class="stat-label">Businesses</p></div>
+                            <div class="stat-item"><h3 class="stat-number">$2B+</h3><p class="stat-label">Earned</p></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <div class="container">
+                    <h2 class="section-title">Why Choose Sha8alny?</h2>
+                    <div class="features-grid">
+                        <div class="feature-card"><h3>Secure Payments</h3><p>Your money is protected with our advanced escrow system and fraud protection.</p></div>
+                        <div class="feature-card"><h3>Smart Matching</h3><p>AI-powered algorithms connect you with the perfect freelancer or project.</p></div>
+                        <div class="feature-card"><h3>Growth Tools</h3><p>Built-in tools to help you grow your business and track your success.</p></div>
+                        <div class="feature-card"><h3>Global Reach</h3><p>Access talent and opportunities from around the world, 24/7.</p></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sign Up Page Content (initially hidden) -->
+        <div id="signup" class="page hidden">
+            <div class="form-page-container">
+                <form id="signupForm">
+                    <h2>Create Your Account</h2>
+                    <label for="signupName">Name:</label><input type="text" id="signupName" required>
+                    <label for="signupEmail">Email:</label><input type="email" id="signupEmail" required>
+                    <label for="signupPassword">Password:</label><input type="password" id="signupPassword" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Login Page Content (initially hidden) -->
+        <div id="login" class="page hidden">
+            <div class="form-page-container">
+                <form id="loginForm">
+                    <h2>Login to Sha8alny</h2>
+                    <label for="loginEmail">Email:</label><input type="email" id="loginEmail" required>
+                    <label for="loginPassword">Password:</label><input type="password" id="loginPassword" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><strong>Email:</strong> contact@sha8alny.com</p>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Address:</strong> 123 Freelance Street, Digital City, DC 12345</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#signup" onclick="showPage('signup')">Sign Up</a></li>
+                        <li><a href="#login" onclick="showPage('login')">Login</a></li>
+                        <li><a href="#footer" onclick="scrollToFooter()">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <a href="#" class="social-link">LinkedIn</a>
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sha8alny. All rights reserved. Founded in 1990.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const pages = document.querySelectorAll('.page');
+
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function scrollToFooter() {
+            document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Sign up successful! (This is a demo)');
+            showPage('login');
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Login successful! (This is a demo)');
+            showPage('home');
+        });
+        
+        showPage('home');
+    </script>
+</body>
+</html>
+
